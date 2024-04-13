@@ -1,0 +1,25 @@
+.table-view .column-header {
+    -fx-text-fill: white;
+    -fx-background-color: rgba(10, 10, 66, 0.72);
+}
+
+.table-view {
+    -fx-background-color: #f4f4f4;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-pref-height: 40px;
+}
+
+/* Style pour l'icône d'édition */
+.edit-icon {
+    -fx-fill: #008000; /* Couleur verte pour l'icône d'édition */
+}
+
+/* Style pour l'icône de suppression */
+.delete-icon {
+    -fx-fill: #FF0000; /* Couleur rouge pour l'icône de suppression */
+}
+
