@@ -42,10 +42,15 @@
     -fx-background-color: #e0e0e0; /* Même couleur de fond que le tableau */
 }
 
-/* Style pour la cellule vide (sans données) */
+
 .table-row-cell:empty {
-    -fx-background-color: transparent; /* Fond transparent pour les cellules vides */
+    -fx-background-color: transparent;
 }
 
-
-
+/* login */
+.label-text {
+    -fx-text-fill: #110b2e;
+    -fx-font-weight: bold;
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 20px;
+}

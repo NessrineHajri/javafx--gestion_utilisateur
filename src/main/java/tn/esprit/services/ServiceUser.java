@@ -37,11 +37,13 @@ public class ServiceUser implements IServices<User> {
 
     @Override
     public void update(User user) throws SQLException {
+        String password = user.getPassword();
+        String encryptedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
         String req = "UPDATE user SET email=?, password=?, username=?, roles=?, is_verified=? WHERE id=?";
         PreparedStatement pre = con.prepareStatement(req);
         pre.setString(1, user.getEmail());
-        pre.setString(2, user.getPassword());
+        pre.setString(2, encryptedPassword);
         pre.setString(3, user.getUsername());
         pre.setString(4, user.getRoles());
         pre.setBoolean(5, user.getIs_verified());
