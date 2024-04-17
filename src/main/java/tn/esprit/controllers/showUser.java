@@ -81,11 +81,11 @@ public class showUser {
             roleCol.setCellValueFactory(cellData -> {
                 String role = cellData.getValue().getRoles();
                 switch (role) {
-                    case "ROLE_ADMIN":
+                    case "[\"ROLE_ADMIN\"]":
                         return new SimpleStringProperty("Administrateur");
-                    case "ROLE_RECRUTEUR":
+                    case "[\"ROLE_RECRUTEUR\"]":
                         return new SimpleStringProperty("Recruteur");
-                    case "ROLE_FREELANCER":
+                    case "[\"ROLE_FREELANCER\"]":
                         return new SimpleStringProperty("Freelancer");
                     default:
                         return new SimpleStringProperty(role);
@@ -104,6 +104,10 @@ public class showUser {
                         private final FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH_ALT);
 
                         {
+                            //  CSS pour les icônes
+                            deleteIcon.getStyleClass().add("delete-icon");
+                            editIcon.getStyleClass().add("edit-icon");
+
                             deleteIcon.setOnMouseClicked(event -> {
                                 User user = getTableView().getItems().get(getIndex());
                                 ServiceUser userService = new ServiceUser();

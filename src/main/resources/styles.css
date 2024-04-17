@@ -1,25 +1,51 @@
+/* Styles pour l'en-tête des colonnes */
 .table-view .column-header {
     -fx-text-fill: white;
     -fx-background-color: rgba(10, 10, 66, 0.72);
 }
 
+/* Styles pour la table */
 .table-view {
-    -fx-background-color: #f4f4f4;
+    -fx-background-color: #f0f0f0;
+    -fx-font-size: 14px;
 }
 
+/* Styles pour le texte dans l'en-tête des colonnes */
 .table-view .column-header .label {
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-pref-height: 40px;
 }
 
-/* Style pour l'icône d'édition */
-.edit-icon {
-    -fx-fill: #008000; /* Couleur verte pour l'icône d'édition */
+/* Styles pour l'icône de suppression */
+.delete-icon {
+    -fx-cursor: hand;
+    -glyph-size: 25px;
+    -fx-fill: #ff1744;
 }
 
-/* Style pour l'icône de suppression */
-.delete-icon {
-    -fx-fill: #FF0000; /* Couleur rouge pour l'icône de suppression */
+/* Styles pour l'icône d'édition */
+.edit-icon {
+    -fx-cursor: hand;
+    -glyph-size: 25px;
+    -fx-fill: #00E676;
 }
+
+/* Styles pour toutes les lignes de la table */
+.table-row-cell {
+    -fx-text-fill: #333333;
+    -fx-background-color: #ffffff; /* Blanc */
+}
+
+/* Styles pour les lignes sélectionnées */
+.table-row-cell:selected {
+    -fx-background-color: #e0e0e0; /* Même couleur de fond que le tableau */
+}
+
+/* Style pour la cellule vide (sans données) */
+.table-row-cell:empty {
+    -fx-background-color: transparent; /* Fond transparent pour les cellules vides */
+}
+
+
 

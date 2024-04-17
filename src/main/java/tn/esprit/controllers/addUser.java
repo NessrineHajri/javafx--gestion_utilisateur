@@ -46,9 +46,33 @@ public class addUser {
     void addUser(ActionEvent event) {
         ServiceUser serviceUser = new ServiceUser();
         User user = new User();
-        user.setUsername(usernameId.getText());
-        user.setEmail(emailId.getText());
-        user.setPassword(passwordId.getText());
+        String username = usernameId.getText().trim();
+        String email = emailId.getText().trim();
+        String password = passwordId.getText();
+
+        if (username.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Please enter your username.");
+            return;
+        }
+
+        user.setUsername(username);
+
+        if (email.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Please enter your email address.");
+            return;
+        } else if (!email.contains("@")) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Email address must contain '@'.");
+            return;
+        }
+
+        user.setEmail(email);
+
+        if (password.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Please enter your password.");
+            return;
+        }
+
+        user.setPassword(password);
 
         // Set isVerified based on CheckBox state
         boolean isVerified = isVerifiedId.isSelected(); // Changed from isverifiedId
