@@ -1,22 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="tn.esprit.controllers.Back"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane id="AnchorPane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="623.0" prefWidth="1271.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.Back">
+    <children>
+        <Pane layoutX="-8.0" prefHeight="185.0" prefWidth="1279.0" style="-fx-background-color: #007bff;" styleClass="sidebar" AnchorPane.leftAnchor="-8.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <VBox styleClass="vbox-style" layoutX="30.0" layoutY="-13.0" prefHeight="636.0" prefWidth="252.0" scaleX="0.89" scaleY="0.89" scaleZ="0.91" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="-13.0">
+            <children>
+
+                <ImageView fitHeight="174.0" fitWidth="144.0">
+                    <image>
+                        <Image url="@images/logoSkillSeekr.png" />
+                    </image>
+               <VBox.margin>
+                  <Insets left="53.0" top="19.0" />
+               </VBox.margin>
+                </ImageView>
+                <JFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" prefHeight="43.0" prefWidth="252.0" ripplerFill="#bfadf8" text="Users" textFill="#5b5858">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+
+                            </image>
+                            <viewport>
+                                <Rectangle2D />
+                            </viewport>
+                        </ImageView>
+                    </graphic>
+                    <padding>
+                        <Insets left="50.0" />
+                    </padding>
+                    <VBox.margin>
+                        <Insets top="30.0" />
+                    </VBox.margin>
+                </JFXButton>
+            </children>
+        </VBox>
+
+
+    </children>
 </AnchorPane>
