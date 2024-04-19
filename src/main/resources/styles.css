@@ -50,6 +50,18 @@
 .table-row-cell:empty {
     -fx-background-color: #ffffff;
 }
+/*
+.table-view .table-cell {
+    -fx-alignment: center;
+}
+*/
+#usersButton {
+    -fx-background-color: #ffffff; /* Couleur de base */
+}
+
+#usersButton:pressed {
+    -fx-background-color: #bfadf8; /* Couleur lorsqu'il est cliqué */
+}
 
 
 /* login */
