@@ -17,6 +17,10 @@
     -fx-pref-height: 40px;
 }
 
+.table-view {
+    -fx-padding: 0px 0px -1px -1px; /* Valeurs négatives pour les côtés droit et bas */
+}
+
 /* Styles pour l'icône de suppression */
 .delete-icon {
     -fx-cursor: hand;
@@ -44,8 +48,9 @@
 
 
 .table-row-cell:empty {
-    -fx-background-color: transparent;
+    -fx-background-color: #ffffff;
 }
+
 
 /* login */
 .label-text {

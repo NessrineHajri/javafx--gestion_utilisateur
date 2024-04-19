@@ -40,7 +40,21 @@ public class editUser {
         usernameId.setText(user.getUsername());
         emailId.setText(user.getEmail());
         passwordId.setText(user.getPassword());
-        roleId.setValue(user.getRoles());
+        // Set the role based on the value from the User object
+        switch (user.getRoles()) {
+            case "[\"ROLE_ADMIN\"]":
+                roleId.setValue("Administrateur");
+                break;
+            case "[\"ROLE_RECRUTEUR\"]":
+                roleId.setValue("Recruteur");
+                break;
+            case "[\"ROLE_FREELANCER\"]":
+                roleId.setValue("Freelancer");
+                break;
+            default:
+                roleId.setValue(null);
+                break;
+        }
         isVerifiedId.setSelected(user.getIs_verified()); // Assuming isVerified is a boolean in User class
     }
 
@@ -51,7 +65,23 @@ public class editUser {
             currentUser.setUsername(usernameId.getText());
             currentUser.setEmail(emailId.getText());
             currentUser.setPassword(passwordId.getText());
-            currentUser.setRoles(roleId.getValue());
+            String selectedRole = roleId.getValue(); // Get the selected role from ComboBox
+            String roleValue;
+            switch (selectedRole) {
+                case "Administrateur":
+                    roleValue = "[\"ROLE_ADMIN\"]";
+                    break;
+                case "Recruteur":
+                    roleValue = "[\"ROLE_RECRUTEUR\"]";
+                    break;
+                case "Freelancer":
+                    roleValue = "[\"ROLE_FREELANCER\"]";
+                    break;
+                default:
+                    showAlert(Alert.AlertType.ERROR, "Error", "Invalid role selected.");
+                    return; // Stop processing if an invalid role is selected
+            }
+            currentUser.setRoles(roleValue);
             currentUser.setIs_verified(isVerifiedId.isSelected()); // Assuming setVerified is the correct method
 
             // Update user in the database
