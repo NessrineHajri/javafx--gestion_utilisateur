@@ -2,13 +2,9 @@ package tn.esprit.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import tn.esprit.utils.MyDB;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import tn.esprit.entities.User;
+import tn.esprit.services.ServiceUser;
 
 public class signUp {
 
@@ -17,12 +13,6 @@ public class signUp {
 
     @FXML
     private TextField emailField;
-
-    @FXML
-    private Pane loginPane;
-
-    @FXML
-    private VBox loginVBox;
 
     @FXML
     private TextField passwordField;
@@ -39,66 +29,80 @@ public class signUp {
     @FXML
     private TextField usernameField;
 
-    private Connection cnx; // Assuming MyConnection.getInstance().getCnx() returns a Connection
+    private ServiceUser userService; // Assuming you have a ServiceUser class for user operations
 
     @FXML
-    public void signUp() {
-        cnx = MyDB.getInstance().getCon();
-        String query = "INSERT INTO user (cin, user_name, numero, email, adresse, password)" +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+    public void initialize() {
+        userService = new ServiceUser(); // Initialize the ServiceUser instance
+    }
 
+    @FXML
+    public void validateInfo() {
+        String username = usernameField.getText().trim();
+        String email = emailField.getText().trim();
+        String password = passwordField.getText();
+        String confirmPassword = confirmPasswordField.getText();
+        String selectedRole = roleComboBox.getValue();
+
+        if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || selectedRole == null) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Please fill in all fields.");
+            return;
+        }
+
+        if (!email.contains("@")) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Email address must contain '@'.");
+            return;
+        }
+
+        if (!password.equals(confirmPassword)) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Passwords do not match.");
+            return;
+        }
+
+        if (!termsCheckBox.isSelected()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Please accept the terms and conditions.");
+            return;
+        }
+
+        // Check if user with the provided email already exists
         try {
-            if (usernameField.getText().isEmpty()
-                    || emailField.getText().isEmpty()
-                    || passwordField.getText().isEmpty()
-                    || confirmPasswordField.getText().isEmpty()
-                    || roleComboBox.getSelectionModel().isEmpty()
-                    || !termsCheckBox.isSelected()) {
-
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Travel Me :: Error Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Enter all required fields!!");
-                alert.showAndWait();
-            } else if (confirmPasswordField.getText().length() < 8 || !confirmPasswordField.getText().equals(passwordField.getText())) {
-
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Travel Me :: Error Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Password should be at least 8 characters long and match the confirmation!");
-                alert.showAndWait();
-            } else {
-                if (ValidationEmail()) {
-                    PreparedStatement smt = cnx.prepareStatement(query);
-
-                    // Assuming these fields are defined elsewhere
-                    // smt.setString(1, cin.getText());
-                    // smt.setString(2, username.getText());
-                    // smt.setString(3, numero.getText());
-                    smt.setString(4, emailField.getText());
-                    // smt.setString(5, adresse.getText());
-                    smt.setString(6, passwordField.getText());
-                    smt.executeUpdate();
-
-                    System.out.println("Successfully added");
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Travel Me :: Welcome");
-                    alert.setHeaderText(null);
-                    alert.setContentText("You are registered!");
-                    alert.showAndWait();
-
-                    loginPane.setVisible(true);
-                    loginVBox.setVisible(false);
-                }
+            if (userService.userExists(email)) {
+                showAlert(Alert.AlertType.ERROR, "Error", "User with email " + email + " already exists.");
+                return;
             }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+
+            // Create a new User object and set its properties
+            User user = new User();
+            user.setUsername(username);
+            user.setEmail(email);
+            user.setPassword(password);
+            user.setRoles(getRoleValue(selectedRole)); // Get the role value based on the selected role
+
+            userService.add(user); // Add the user using the ServiceUser instance
+
+            showAlert(Alert.AlertType.CONFIRMATION, "Success", "User registered successfully.");
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to register user: " + e.getMessage());
         }
     }
 
-    // Placeholder for ValidationEmail() method
-    private boolean ValidationEmail() {
-        // Your email validation logic here
-        return true; // Placeholder return value
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private String getRoleValue(String selectedRole) {
+        switch (selectedRole) {
+            case "Administrateur":
+                return "[\"ROLE_ADMIN\"]";
+            case "Recruteur":
+                return "[\"ROLE_RECRUTEUR\"]";
+            case "Freelancer":
+                return "[\"ROLE_FREELANCER\"]";
+            default:
+                return ""; // Handle other cases accordingly
+        }
     }
 }

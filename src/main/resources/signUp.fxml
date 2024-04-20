@@ -121,7 +121,7 @@
                             <Font size="18.0" />
                         </font>
                     </Text>
-                    <ComboBox fx:id="roleComboBox" prefWidth="200.0" promptText="Select a role" style="-fx-border-radius: 20; -fx-background-color: #E4E4E4; -fx-font-family: Serif; -fx-font-size: 23; -fx-text-fill: #666666;">
+                    <ComboBox fx:id="roleComboBox" prefHeight="43.0" prefWidth="235.0" promptText="Select a role" style="-fx-border-radius: 20; -fx-background-color: #E4E4E4; -fx-font-family: Serif; -fx-font-size: 23; -fx-text-fill: #666666;">
                         <VBox.margin>
                             <Insets bottom="15.0" left="20.0" top="15.0" />
                         </VBox.margin>
@@ -149,7 +149,7 @@
                </VBox.margin>
                 </HBox>
                 
-                <Button fx:id="signupButton" mnemonicParsing="false" prefHeight="43.0" prefWidth="519.0" style="-fx-border-radius: 20; -fx-background-color: #80B3FF; -fx-font-family: Serif; -fx-font-size: 20;" text="Create Account" textAlignment="CENTER" textFill="WHITE">
+                <Button fx:id="signupButton" mnemonicParsing="false" onMouseClicked="#validateInfo" prefHeight="43.0" prefWidth="519.0" style="-fx-border-radius: 20; -fx-background-color: #80B3FF; -fx-font-family: Serif; -fx-font-size: 20;" text="Create Account" textAlignment="CENTER" textFill="WHITE">
                     <VBox.margin>
                         <Insets bottom="15.0" left="20.0" top="-11.0" />
                     </VBox.margin></Button>

@@ -18,7 +18,25 @@ public class ServiceUser implements IServices<User> {
         con= MyDB.getInstance().getCon();
     }
 
-
+    public boolean authenticateUser(String email, String userPassword) throws SQLException {
+        try {
+            String query = "SELECT password FROM user WHERE email=?";
+            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+                preparedStatement.setString(1, email);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet.next()) {
+                    String hashedPasswordFromDB = resultSet.getString("password");
+                    return BCrypt.checkpw(userPassword, hashedPasswordFromDB);
+                }
+                return false; // No user with the provided email found
+            }
+        } catch (SQLException e) {
+            // Log the exception for debugging purposes
+            System.err.println("Error authenticating user: " + e.getMessage());
+            throw e; // Re-throw the exception to be handled in the controller
+        }
+    }
+/*
     @Override
     public void add(User user) throws SQLException{
         String password = user.getPassword();
@@ -32,6 +50,44 @@ public class ServiceUser implements IServices<User> {
             pre.setString(4, user.getRoles());
             pre.setBoolean(5, user.getIs_verified());
             pre.executeUpdate();
+        }
+    }
+*/
+@Override
+public void add(User user) throws SQLException {
+    String email = user.getEmail();
+
+    // Check if the user with the provided email already exists
+    if (userExists(email)) {
+        throw new SQLException("Error: User with email " + email + " already exists.");
+    }
+
+    // If user doesn't exist, proceed with adding the user
+    String password = user.getPassword();
+    String encryptedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+
+    String req = "INSERT INTO user (email, password, username, roles, is_verified) VALUES (?, ?, ?, ?, ?)";
+    try (PreparedStatement pre = con.prepareStatement(req)) {
+        pre.setString(1, email);
+        pre.setString(2, encryptedPassword);
+        pre.setString(3, user.getUsername());
+        pre.setString(4, user.getRoles());
+        pre.setBoolean(5, user.getIs_verified());
+        pre.executeUpdate();
+    }
+}
+
+    // Helper method to check if a user with the given email already exists
+    public boolean userExists(String email) throws SQLException {
+        String query = "SELECT COUNT(*) AS count FROM user WHERE email=?";
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int count = resultSet.getInt("count");
+                return count > 0; // User exists if count is greater than 0
+            }
+            return false; // No user found with the provided email
         }
     }
 

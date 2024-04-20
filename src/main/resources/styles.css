@@ -78,3 +78,10 @@
     -fx-background-radius: 20 20 0 0; /* Coins arrondis en haut */
 }
 
+
+
+/*
+.head-background {
+    -fx-background-color: linear-gradient(to left, #795AF3, #3929E0);
+}
+ */
