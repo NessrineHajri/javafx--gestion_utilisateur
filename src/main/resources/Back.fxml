@@ -33,7 +33,7 @@
             </Text>
 
              <HBox id="logout" layoutX="1147.0" layoutY="31.0" spacing="10.0">
-                 <FontAwesomeIconView glyphName="USER" layoutX="0.0" layoutY="0.0" size="19" fill="WHITE"/>
+                 <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="0.0" layoutY="0.0" size="19" />
                  <Text fill="WHITE" layoutX="24.0" layoutY="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logout">
                      <font>
                          <Font name="Arial Bold" size="18.0" />
@@ -73,6 +73,90 @@
                <VBox.margin>
                   <Insets top="26.0" />
                </VBox.margin>
+                </HBox>
+
+                <HBox id="offersButton" spacing="10.0">
+                    <FontAwesomeIconView fill="#172bc270" glyphName="BRIEFCASE" size="19" wrappingWidth="13.980731010437012">
+                        <HBox.margin>
+                            <Insets left="41.0" top="13.0" />
+                        </HBox.margin></FontAwesomeIconView>
+                    <JFXButton prefHeight="43.0" prefWidth="99.0" ripplerFill="#ffffff" text="Offers">
+                        <font>
+                            <Font size="20.0" />
+                        </font>
+                        <padding>
+                            <Insets left="10.0" />
+                        </padding>
+                        <HBox.margin>
+                            <Insets left="-1.0" />
+                        </HBox.margin>
+                    </JFXButton>
+                    <VBox.margin>
+                        <Insets top="11.0" />
+                    </VBox.margin>
+                </HBox>
+
+                <HBox id="reclamationButton" spacing="10.0">
+                    <FontAwesomeIconView fill="#172bc270" glyphName="TABLE" size="19" wrappingWidth="13.980731010437012">
+                        <HBox.margin>
+                            <Insets left="41.0" top="13.0" />
+                        </HBox.margin></FontAwesomeIconView>
+                    <JFXButton prefHeight="43.0" prefWidth="137.0" ripplerFill="#ffffff" text="Reclamation">
+                        <font>
+                            <Font size="20.0" />
+                        </font>
+                        <padding>
+                            <Insets left="10.0" />
+                        </padding>
+                        <HBox.margin>
+                            <Insets left="8.0" />
+                        </HBox.margin>
+                    </JFXButton>
+                    <VBox.margin>
+                        <Insets top="11.0" />
+                    </VBox.margin>
+                </HBox>
+
+                <HBox id="reponseButton" spacing="10.0">
+                    <FontAwesomeIconView fill="#172bc270" glyphName="COMMENT" size="19" wrappingWidth="13.980731010437012">
+                        <HBox.margin>
+                            <Insets left="41.0" top="13.0" />
+                        </HBox.margin></FontAwesomeIconView>
+                    <JFXButton prefHeight="43.0" prefWidth="99.0" ripplerFill="#ffffff" text="Reponse">
+                        <font>
+                            <Font size="20.0" />
+                        </font>
+                        <padding>
+                            <Insets left="10.0" />
+                        </padding>
+                        <HBox.margin>
+                            <Insets left="8.0" />
+                        </HBox.margin>
+                    </JFXButton>
+                    <VBox.margin>
+                        <Insets top="11.0" />
+                    </VBox.margin>
+                </HBox>
+
+                <HBox id="entretienButton" spacing="10.0">
+                    <FontAwesomeIconView fill="#172bc270" glyphName="CALENDAR_ALT" size="19" wrappingWidth="13.980731010437012">
+                        <HBox.margin>
+                            <Insets left="41.0" top="13.0" />
+                        </HBox.margin></FontAwesomeIconView>
+                    <JFXButton prefHeight="43.0" prefWidth="99.0" ripplerFill="#ffffff" text="Entretien">
+                        <font>
+                            <Font size="20.0" />
+                        </font>
+                        <padding>
+                            <Insets left="10.0" />
+                        </padding>
+                        <HBox.margin>
+                            <Insets left="7.0" />
+                        </HBox.margin>
+                    </JFXButton>
+                    <VBox.margin>
+                        <Insets top="11.0" />
+                    </VBox.margin>
                 </HBox>
 
 
