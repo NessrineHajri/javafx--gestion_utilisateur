@@ -6,12 +6,9 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import tn.esprit.entities.User;
 import tn.esprit.services.ServiceUser;
-import javafx.scene.control.CheckBox;
 
 
 public class addUser {
@@ -34,7 +31,7 @@ public class addUser {
     private CheckBox isVerifiedId;
 
     @FXML
-    private TextField passwordId;
+    private PasswordField passwordId;
 
     @FXML
     private ComboBox<String> roleId;
@@ -49,6 +46,7 @@ public class addUser {
         String username = usernameId.getText().trim();
         String email = emailId.getText().trim();
         String password = passwordId.getText();
+
 
         if (username.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Error", "Please enter your username.");

@@ -18,17 +18,17 @@
             <children>
                 <Text fill="#9dceee" layoutX="335.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SKILLSEEKR ">
                     <font>
-                        <Font size="14.0" />
+                        <Font size="16.0" />
                     </font>
                 </Text>
                 <Text fill="WHITE" layoutX="417.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/ Users">
                     <font>
-                        <Font name="Arial Bold" size="14.0" />
+                        <Font name="Arial Bold" size="16.0" />
                     </font>
                 </Text>
                 <Text fill="WHITE" layoutX="335.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Users list">
                     <font>
-                        <Font name="Arial Bold" size="15.0" />
+                        <Font name="Arial Bold" size="17.0" />
                     </font>
                 </Text>
 

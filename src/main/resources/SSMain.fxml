@@ -21,7 +21,7 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="tn.esprit.controllers.SSMain"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="623.0" prefWidth="1271.0">
     <children>
         <Pane prefHeight="173.0" prefWidth="980.0" style="-fx-background-color: #4490de;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>

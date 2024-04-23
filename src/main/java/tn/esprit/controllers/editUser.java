@@ -1,10 +1,7 @@
 package tn.esprit.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import tn.esprit.entities.User;
 import tn.esprit.services.IServices;
 import tn.esprit.services.ServiceUser;
@@ -19,7 +16,7 @@ public class editUser {
     private TextField emailId;
 
     @FXML
-    private TextField passwordId;
+    private PasswordField passwordId;
 
     @FXML
     private ComboBox<String> roleId;

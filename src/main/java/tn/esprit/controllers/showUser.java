@@ -91,6 +91,7 @@ public class showUser {
                         return new SimpleStringProperty(role);
                 }
             });
+
             verificationCol.setCellValueFactory(cellData ->
                     new SimpleIntegerProperty(cellData.getValue().getIs_verified() ? 1 : 0).asObject());
 

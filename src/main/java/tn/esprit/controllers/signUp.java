@@ -9,13 +9,13 @@ import tn.esprit.services.ServiceUser;
 public class signUp {
 
     @FXML
-    private TextField confirmPasswordField;
+    private PasswordField confirmPasswordField;
 
     @FXML
     private TextField emailField;
 
     @FXML
-    private TextField passwordField;
+    private PasswordField passwordField;
 
     @FXML
     private ComboBox<String> roleComboBox;
@@ -43,19 +43,33 @@ public class signUp {
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
         String selectedRole = roleComboBox.getValue();
-
+/*
         if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || selectedRole == null) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Please fill in all fields.");
+            showAlert(Alert.AlertType.ERROR, "Error", "Please enter your username.");
+            return;
+        }
+*/
+        if (username.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Please enter your username.");
             return;
         }
 
-        if (!email.contains("@")) {
+
+        if (email.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Please enter your email address.");
+            return;
+        } else if (!email.contains("@")) {
             showAlert(Alert.AlertType.ERROR, "Error", "Email address must contain '@'.");
             return;
         }
 
-        if (!password.equals(confirmPassword)) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Passwords do not match.");
+        if (password.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Please enter your password.");
+            return;
+        }
+
+        if (password.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Please confirm your password.");
             return;
         }
 
