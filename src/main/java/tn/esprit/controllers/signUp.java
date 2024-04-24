@@ -1,5 +1,6 @@
 package tn.esprit.controllers;
 
+import tn.esprit.API.EmailAPI;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -94,7 +95,10 @@ public class signUp {
 
             userService.add(user); // Add the user using the ServiceUser instance
 
-            showAlert(Alert.AlertType.CONFIRMATION, "Success", "User registered successfully.");
+            // Call the sendEmailVerification method from EmailAPI to send the verification email
+            EmailAPI.sendEmailVerification(email);
+
+            showAlert(Alert.AlertType.INFORMATION, "Success", "User registered successfully.");
         } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Error", "Failed to register user: " + e.getMessage());
         }
