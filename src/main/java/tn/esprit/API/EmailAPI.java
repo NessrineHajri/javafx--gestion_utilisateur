@@ -4,14 +4,14 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
+import java.util.Random;
 
 public class EmailAPI {
+    private static final String username = "hjness66@gmail.com"; // Votre adresse Gmail
+    private static final String password = "cedz bgkg qgkl iudo"; // Votre mot de passe Gmail
+    private static Session session; // Session SMTP
 
-    public static void sendEmailVerification(String recipientEmail) {
-
-        final String username = "hjness66@gmail.com"; // Votre adresse Gmail
-        final String password = "cedz bgkg qgkl iudo"; // Votre mot de passe Gmail
-
+    static {
         // Propriétés pour la configuration SMTP de Gmail
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -20,36 +20,60 @@ public class EmailAPI {
         props.put("mail.smtp.port", "587");
 
         // Création d'une session d'authentification
-        Session session = Session.getInstance(props, new Authenticator() {
+        session = Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
             }
         });
+    }
 
+    public static void sendEmailVerification(String recipientEmail) {
         try {
-            // Création du message
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(username));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
-            message.setSubject("Email Verification");
+            // Création du message de vérification de l'e-mail
+            Message verificationMessage = new MimeMessage(session);
+            verificationMessage.setFrom(new InternetAddress(username));
+            verificationMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
+            verificationMessage.setSubject("Email Verification");
+            verificationMessage.setText("Bienvenue à SkillSeekr");
 
-            message.setContent("<h1>Hi! Please confirm your email!</h1>" +
-                            "<p>Please confirm your email address by clicking the following link:  <a href='http://yourserver:yourport/yourwebapp/welcome'> confirm my Email</a></p>",
-                    "text/html");
+            // Envoi du message de vérification
+            Transport.send(verificationMessage);
 
-            // Envoi du message
-            Transport.send(message);
-
-            System.out.println("Email sent successfully.");
-
+            System.out.println("Email sent successfully for verification.");
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void main(String[] args) {
-        // Exemple d'appel à la méthode sendEmailVerification
-        sendEmailVerification("recipient@example.com");
+    public static void sendEmailWithOTP(String recipientEmail, String otp) {
+        try {
+            // Création du message avec le code OTP pour vérification
+            Message otpMessage = new MimeMessage(session);
+            otpMessage.setFrom(new InternetAddress(username));
+            otpMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
+            otpMessage.setSubject("Code OTP pour vérification");
+
+            // Ajout du code OTP au contenu du message
+            otpMessage.setText("Votre code OTP est : " + otp);
+
+            // Envoi du message avec le code OTP
+            Transport.send(otpMessage);
+
+            System.out.println("E-mail sent successfully with OTP code for verification.");
+        } catch (MessagingException e) {
+            System.out.println("Error sending email: " + e.getMessage());
+        }
     }
 
+    // Méthode pour générer un code aléatoire
+    public static String generateRandomCode(int length) {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder code = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(chars.length());
+            code.append(chars.charAt(index));
+        }
+        return code.toString();
+    }
 }

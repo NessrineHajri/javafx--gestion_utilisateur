@@ -7,12 +7,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import tn.esprit.services.ServiceUser;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 
 public class login {
@@ -85,29 +87,36 @@ public class login {
         stage.setScene(scene);
         stage.show();
     }
-/*
+
     @FXML
-    private void logoutClick() {
+    private void handleForgotPasswordClick(ActionEvent event) {
         try {
-            // Charger le fichier FXML de la page de connexion
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+            // Load the FXML file using getResourceAsStream
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ForgotPassword.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root);
 
-            // Obtenir la fenêtre actuelle à partir de l'événement MouseEvent
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            // Access the controller of the loaded FXML (if needed)
+            ForgotPassword forgotPassword = loader.getController();
 
-            // Réinitialiser la session ou les données de l'utilisateur s'il y en a
-            // Exemple : currentUser = null; (si currentUser est votre objet de session)
+            // Create a new stage for the ForgotPassword window
+            Stage forgotPasswordStage = new Stage();
+            forgotPasswordStage.setScene(new Scene(root));
+            forgotPasswordStage.setTitle("Forgot Password");
 
-            // Changer la scène pour afficher la page de connexion
-            stage.setScene(scene);
-            stage.show();
+            // Set modality to APPLICATION_MODAL to make the window modal
+            forgotPasswordStage.initModality(Modality.APPLICATION_MODAL);
+
+            // Show the ForgotPassword window and wait for it to be closed
+            forgotPasswordStage.showAndWait();
         } catch (IOException e) {
-            showAlert(Alert.AlertType.ERROR, "Erreur", "Échec du chargement de l'interface de connexion : " + e.getMessage());
+            e.printStackTrace();
+            // Handle the exception appropriately (e.g., show an error dialog)
         }
     }
 
-*/
+
+
+
+
 
 }
