@@ -88,6 +88,7 @@ public class login {
         stage.show();
     }
 
+
     @FXML
     private void handleForgotPasswordClick(ActionEvent event) {
         try {
@@ -113,10 +114,5 @@ public class login {
             // Handle the exception appropriately (e.g., show an error dialog)
         }
     }
-
-
-
-
-
 
 }
