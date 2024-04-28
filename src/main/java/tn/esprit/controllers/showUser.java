@@ -19,6 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
+import tn.esprit.API.EmailAPI;
 import tn.esprit.entities.User;
 import tn.esprit.services.ServiceUser;
 
@@ -127,16 +128,31 @@ public class showUser {
                                 try {
                                     Parent root = loader.load();
                                     editUser editUserController = loader.getController();
-                                    editUserController.initData(user); // Pass the user data to the edit controller
+                                    editUserController.initData(user); // Pass user data to the edit controller
                                     Stage stage = new Stage();
                                     stage.setScene(new Scene(root));
                                     stage.initStyle(StageStyle.UTILITY);
                                     stage.showAndWait();
+
+                                    String subject;
+                                    String message;
+                                    if (user.getIs_verified()) {
+                                        subject = "Your account has been verified";
+                                        message = "Dear " + user.getUsername() + ", your account has been verified. You can now log in.";
+                                    } else {
+                                        subject = "Your account is not yet verified";
+                                        message = "Dear " + user.getUsername() + ", your account has not yet been verified. Please check your email address to complete the verification.";
+                                    }
+
+                                    EmailAPI.sendEmail(user.getEmail(), subject, message); // Make sure EmailAPI class is correctly implemented for sending emails
+
                                     refreshTableView(); // Refresh the table after editing
                                 } catch (IOException ex) {
-                                    Logger.getLogger(showUser.class.getName()).log(Level.SEVERE, null, ex);
+                                    Logger.getLogger(showUser.class.getName()).log(Level.SEVERE, "Error handling edit user action", ex);
+                                    // Handle the exception (e.g., show an error message)
                                 }
                             });
+
 
 
 

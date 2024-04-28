@@ -27,6 +27,23 @@ public class EmailAPI {
         });
     }
 
+    public static void sendEmail(String recipientEmail, String subject, String messageBody) {
+        try {
+            // Création du message
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
+            message.setSubject(subject);
+            message.setText(messageBody);
+
+            // Envoi du message
+            Transport.send(message);
+
+            System.out.println("E-mail sent successfully.");
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public static void sendEmailVerification(String recipientEmail) {
         try {
             // Création du message de vérification de l'e-mail
@@ -34,7 +51,9 @@ public class EmailAPI {
             verificationMessage.setFrom(new InternetAddress(username));
             verificationMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
             verificationMessage.setSubject("Email Verification");
-            verificationMessage.setText("Bienvenue à SkillSeekr");
+            verificationMessage.setText("<html>Welcome to Skillseekr! Thank you for registering with us.<br><br>" +
+                    "Please note that your account activation is pending admin authorization. " +
+                    "You will receive an email notification once your account has been approved and activated.</html>");
 
             // Envoi du message de vérification
             Transport.send(verificationMessage);
