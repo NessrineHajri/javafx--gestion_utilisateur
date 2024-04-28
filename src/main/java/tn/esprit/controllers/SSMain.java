@@ -2,6 +2,7 @@ package tn.esprit.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -32,6 +33,7 @@ public class SSMain  {
 
     @FXML
     private void handleButtonClicks(javafx.event.ActionEvent mouseEvent) {
+        Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         if (mouseEvent.getSource() == btnOffers) {
             // Load Offers page
             loadStage("/com/Skillseekr/Offer/Offer.fxml");
@@ -48,6 +50,7 @@ public class SSMain  {
             loadStage("/com/Skillseekr/Projects/Projects.fxml");
         }
         else if ((mouseEvent.getSource() == btnUsers)) {
+            stage.close(); // Fermer la fenêtre actuelle
             loadStage("/Back.fxml");
         }
     }

@@ -1,5 +1,6 @@
 package tn.esprit.controllers;
 
+import javafx.stage.Stage;
 import tn.esprit.API.EmailAPI;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -99,6 +100,8 @@ public class signUp {
             EmailAPI.sendEmailVerification(email);
 
             showAlert(Alert.AlertType.INFORMATION, "Success", "User registered successfully.");
+            Stage stage = (Stage) signupButton.getScene().getWindow();
+            stage.close();
         } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Error", "Failed to register user: " + e.getMessage());
         }
@@ -123,4 +126,5 @@ public class signUp {
                 return ""; // Handle other cases accordingly
         }
     }
+
 }

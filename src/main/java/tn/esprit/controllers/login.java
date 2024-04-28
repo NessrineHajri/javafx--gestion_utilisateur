@@ -41,6 +41,24 @@ public class login {
             String email = emailField.getText().trim();
             String password = passwordField.getText();
 
+            boolean authenticated = userService.authenticateUser(email, password);
+
+            if (authenticated) {
+                redirectToBackInterface();
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Error", "Invalid credentials. Please try again.");
+            }
+        } catch (SQLException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to authenticate user: " + e.getMessage());
+        }
+    }
+    /*
+        @FXML
+    public void loginButton2() {
+        try {
+            String email = emailField.getText().trim();
+            String password = passwordField.getText();
+
             boolean userExists = userService.authenticateUser(email, password);
 
             if (userExists) {
@@ -52,6 +70,8 @@ public class login {
             showAlert(Alert.AlertType.ERROR, "Error", "Failed to authenticate user: " + e.getMessage());
         }
     }
+
+     */
 
     private void redirectToBackInterface() {
         try {
@@ -75,17 +95,20 @@ public class login {
     }
     @FXML
     private void handleRegisterClick(ActionEvent event) throws IOException {
+        // Charger le fichier FXML signUp.fxml
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/signUp.fxml"));
         Parent root = loader.load();
 
-        // Access the controller of the loaded FXML (if needed)
-        signUp signUpController = loader.getController();
+        // Créer une nouvelle scène pour la fenêtre signUp
+        Scene signUpScene = new Scene(root);
 
-        // Replace the current content with the loaded FXML content
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+        // Créer une nouvelle fenêtre pour la scène signUpScene
+        Stage signUpStage = new Stage();
+        signUpStage.setScene(signUpScene);
+        signUpStage.setTitle("Sign Up");
+
+        // Afficher la nouvelle fenêtre signUpStage sans fermer la fenêtre de login
+        signUpStage.show();
     }
 
 

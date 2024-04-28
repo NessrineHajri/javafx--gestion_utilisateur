@@ -35,7 +35,8 @@ public class ServiceUser implements IServices<User> {
         }
     }
 
-    public boolean authenticateUser(String email, String userPassword) throws SQLException {
+/*
+       public boolean authenticateUser(String email, String userPassword) throws SQLException {
         try {
             String query = "SELECT password FROM user WHERE email=?";
             try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
@@ -53,7 +54,37 @@ public class ServiceUser implements IServices<User> {
             throw e; // Re-throw the exception to be handled in the controller
         }
     }
-/*
+    */
+
+
+
+public boolean authenticateUser(String email, String userPassword) throws SQLException {
+    try {
+        String query = "SELECT password, is_verified FROM user WHERE email=?";
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                String hashedPasswordFromDB = resultSet.getString("password");
+                boolean isVerified = resultSet.getBoolean("is_verified");
+                if (isVerified && BCrypt.checkpw(userPassword, hashedPasswordFromDB)) {
+                    return true; // User is verified and password matches
+                } else {
+                    return false; // User is not verified or password does not match
+                }
+            }
+            return false; // No user with the provided email found
+        }
+    } catch (SQLException e) {
+        // Log the exception for debugging purposes
+        System.err.println("Error authenticating user: " + e.getMessage());
+        throw e; // Re-throw the exception to be handled in the controller
+    }
+}
+
+
+
+    /*
     @Override
     public void add(User user) throws SQLException{
         String password = user.getPassword();
