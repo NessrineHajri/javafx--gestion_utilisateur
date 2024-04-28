@@ -18,6 +18,23 @@ public class ServiceUser implements IServices<User> {
         con= MyDB.getInstance().getCon();
     }
 
+    public void updatePassword(String email, String newPassword) throws SQLException {
+        try {
+            String hashedNewPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
+
+            String query = "UPDATE user SET password=? WHERE email=?";
+            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+                preparedStatement.setString(1, hashedNewPassword);
+                preparedStatement.setString(2, email);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            // Log the exception for debugging purposes
+            System.err.println("Error updating password: " + e.getMessage());
+            throw e; // Re-throw the exception to be handled in the controller
+        }
+    }
+
     public boolean authenticateUser(String email, String userPassword) throws SQLException {
         try {
             String query = "SELECT password FROM user WHERE email=?";
