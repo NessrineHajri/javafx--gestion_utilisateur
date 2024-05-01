@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -92,10 +93,8 @@
                      </VBox>
                      <VBox spacing="10" />
                      <HBox alignment="CENTER" spacing="90">
-                        <Hyperlink onAction="#handleForgotPasswordClick" style="-fx-font-size: 18.0;" text="Forgot password">
-                           <HBox.margin>
-                              <Insets left="152.0" />
-                           </HBox.margin></Hyperlink>
+                        <CheckBox fx:id="rememberMeCheckBox" style="-fx-font-size: 18.0;" text="Remember me" />
+                        <Hyperlink onAction="#handleForgotPasswordClick" style="-fx-font-size: 18.0;" text="Forgot password" />
                         <VBox.margin>
                            <Insets />
                         </VBox.margin>

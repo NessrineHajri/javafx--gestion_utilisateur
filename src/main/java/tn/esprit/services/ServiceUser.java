@@ -80,6 +80,24 @@ public boolean authenticateUser(String email, String userPassword) throws SQLExc
     }
 }
 
+    public boolean emailExists(String email) throws SQLException {
+        try {
+            String query = "SELECT COUNT(*) AS count FROM user WHERE email=?";
+            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+                preparedStatement.setString(1, email);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet.next()) {
+                    int count = resultSet.getInt("count");
+                    return count > 0; // True if email exists, false otherwise
+                }
+                return false; // No result found
+            }
+        } catch (SQLException e) {
+            // Log the exception for debugging purposes
+            System.err.println("Error checking email existence: " + e.getMessage());
+            throw e; // Re-throw the exception to be handled in the controller
+        }
+    }
 
 
 

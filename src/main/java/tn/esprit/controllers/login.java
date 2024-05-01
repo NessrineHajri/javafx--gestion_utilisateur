@@ -16,7 +16,8 @@ import javafx.scene.Node;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
-
+import java.util.prefs.Preferences;
+import javafx.scene.control.CheckBox;
 public class login {
 
     @FXML
@@ -30,11 +31,16 @@ public class login {
 
     private ServiceUser userService;
 
+    private Preferences preferences;
 
+    @FXML
+    private CheckBox rememberMeCheckBox;
     public login() {
         userService = new ServiceUser(); // Initialise ServiceUser
+        preferences = Preferences.userNodeForPackage(login.class);
     }
 
+    /*
     @FXML
     public void loginButton2() {
         try {
@@ -52,26 +58,66 @@ public class login {
             showAlert(Alert.AlertType.ERROR, "Error", "Failed to authenticate user: " + e.getMessage());
         }
     }
-    /*
-        @FXML
+
+*/
+
+    @FXML
     public void loginButton2() {
         try {
             String email = emailField.getText().trim();
             String password = passwordField.getText();
 
-            boolean userExists = userService.authenticateUser(email, password);
+            // Vérifie si l'email est vide
+            if (email.isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Error", "Please enter your email.");
+                return;
+            }
 
-            if (userExists) {
+            // Vérifie si l'email contient '@'
+            if (!email.contains("@")) {
+                showAlert(Alert.AlertType.ERROR, "Error", "Please enter a valid email address containing '@'.");
+                return;
+            }
+
+            // Vérifie si le mot de passe est vide
+            if (password.isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Error", "Please enter your password.");
+                return;
+            }
+
+            // Vérifie si "Se souvenir de moi" est sélectionné pour la connexion automatique
+            if (rememberMeCheckBox.isSelected()) {
+                saveCredentials(email, password);
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Error", "Please check 'Remember me' to sign in automatically.");
+                return;
+            }
+
+            boolean authenticated = userService.authenticateUser(email, password);
+
+            if (authenticated) {
                 redirectToBackInterface();
             } else {
-                showAlert(Alert.AlertType.ERROR, "Error", "Invalid credentials. Please try again.");
+                // Vérifie si l'email est correct mais le mot de passe est incorrect
+                if (userService.emailExists(email)) {
+                    showAlert(Alert.AlertType.ERROR, "Error", "Your password is incorrect. Please try again.");
+                } else {
+                    showAlert(Alert.AlertType.ERROR, "Error", "Email does not exist. Please check your email or register.");
+                }
             }
         } catch (SQLException e) {
             showAlert(Alert.AlertType.ERROR, "Error", "Failed to authenticate user: " + e.getMessage());
         }
     }
 
-     */
+
+
+
+    private void saveCredentials(String email, String password) {
+        preferences.put("email", email);
+        preferences.put("password", password);
+        // You can add additional preferences if needed
+    }
 
     private void redirectToBackInterface() {
         try {
