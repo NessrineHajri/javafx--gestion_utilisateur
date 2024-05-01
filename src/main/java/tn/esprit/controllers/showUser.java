@@ -67,7 +67,6 @@ public class showUser {
         }
     }
 
-
     @FXML
     void initialize() {
         ServiceUser serviceUser = new ServiceUser();
@@ -141,7 +140,7 @@ public class showUser {
                                         message = "Dear " + user.getUsername() + ", your account has been verified. You can now log in.";
                                     } else {
                                         subject = "Your account is not yet verified";
-                                        message = "Dear " + user.getUsername() + ", your account has not yet been verified. Please check your email address to complete the verification.";
+                                        message = "Dear " + user.getUsername() + ", Your account is currently blocked";
                                     }
 
                                     EmailAPI.sendEmail(user.getEmail(), subject, message); // Make sure EmailAPI class is correctly implemented for sending emails

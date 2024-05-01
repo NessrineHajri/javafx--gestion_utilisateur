@@ -3,7 +3,6 @@ package tn.esprit.services;
 import org.mindrot.jbcrypt.BCrypt;
 import tn.esprit.entities.User;
 import tn.esprit.utils.MyDB;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +56,6 @@ public class ServiceUser implements IServices<User> {
     */
 
 
-
 public boolean authenticateUser(String email, String userPassword) throws SQLException {
     try {
         String query = "SELECT password, is_verified FROM user WHERE email=?";
@@ -81,6 +79,7 @@ public boolean authenticateUser(String email, String userPassword) throws SQLExc
         throw e; // Re-throw the exception to be handled in the controller
     }
 }
+
 
 
 
@@ -141,17 +140,16 @@ public void add(User user) throws SQLException {
 
     @Override
     public void update(User user) throws SQLException {
-        String password = user.getPassword();
-        String encryptedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
-        String req = "UPDATE user SET email=?, password=?, username=?, roles=?, is_verified=? WHERE id=?";
+
+        String req = "UPDATE user SET email=?, username=?, roles=?, is_verified=? WHERE id=?";
         PreparedStatement pre = con.prepareStatement(req);
         pre.setString(1, user.getEmail());
-        pre.setString(2, encryptedPassword);
-        pre.setString(3, user.getUsername());
-        pre.setString(4, user.getRoles());
-        pre.setBoolean(5, user.getIs_verified());
-        pre.setInt(6, user.getId());
+
+        pre.setString(2, user.getUsername());
+        pre.setString(3, user.getRoles());
+        pre.setBoolean(4, user.getIs_verified());
+        pre.setInt(5, user.getId());
         pre.executeUpdate();
     }
 
@@ -181,6 +179,30 @@ public void add(User user) throws SQLException {
                 users.add(u);
             }
         return users;
+    }
+
+    @Override
+    public void signup(User user) throws SQLException {
+        String email = user.getEmail();
+
+        // Check if the user with the provided email already exists
+        if (userExists(email)) {
+            throw new SQLException("Error: User with email " + email + " already exists.");
+        }
+
+        // If user doesn't exist, proceed with adding the user
+        String password = user.getPassword();
+        String encryptedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+
+        String req = "INSERT INTO user (email, password, username, roles, is_verified) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement pre = con.prepareStatement(req)) {
+            pre.setString(1, email);
+            pre.setString(2, encryptedPassword);
+            pre.setString(3, user.getUsername());
+            pre.setString(4, user.getRoles());
+            pre.setBoolean(5, user.getIs_verified());
+            pre.executeUpdate();
+        }
     }
 
 

@@ -51,9 +51,9 @@ public class EmailAPI {
             verificationMessage.setFrom(new InternetAddress(username));
             verificationMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
             verificationMessage.setSubject("Email Verification");
-            verificationMessage.setText("<html>Welcome to Skillseekr! Thank you for registering with us.<br><br>" +
-                    "Please note that your account activation is pending admin authorization. " +
-                    "You will receive an email notification once your account has been approved and activated.</html>");
+            verificationMessage.setText("Welcome to Skillseekr! Thank you for registering with us.\n\n" +
+                    "Your account is awaiting administrative approval. You will receive an email notification once it is activated.");
+
 
             // Envoi du message de vérification
             Transport.send(verificationMessage);
@@ -86,7 +86,7 @@ public class EmailAPI {
 
     // Méthode pour générer un code aléatoire
     public static String generateRandomCode(int length) {
-        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        String chars = "0123456789";
         StringBuilder code = new StringBuilder();
         Random random = new Random();
         for (int i = 0; i < length; i++) {

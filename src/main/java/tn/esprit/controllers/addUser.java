@@ -1,123 +1,107 @@
 package tn.esprit.controllers;
 
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
-
-import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
 import tn.esprit.entities.User;
 import tn.esprit.services.ServiceUser;
-
+import tn.esprit.API.EmailAPI;
 
 public class addUser {
-    private void showAlert(Alert.AlertType type, String title, String message) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
-    private TextField emailId;
-
-    @FXML
-    private CheckBox isVerifiedId;
-
-    @FXML
-    private PasswordField passwordId;
-
-    @FXML
-    private ComboBox<String> roleId;
 
     @FXML
     private TextField usernameId;
 
     @FXML
-    void addUser(ActionEvent event) {
-        ServiceUser serviceUser = new ServiceUser();
-        User user = new User();
-        String username = usernameId.getText().trim();
-        String email = emailId.getText().trim();
-        String password = passwordId.getText();
+    private TextField emailId;
 
+    @FXML
+    private ComboBox<String> roleId;
 
-        if (username.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Please enter your username.");
-            return;
-        }
+    @FXML
+    private Button addUserButton;
 
-        user.setUsername(username);
+    @FXML
+    private CheckBox isVerifiedId;
 
-        if (email.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Please enter your email address.");
-            return;
-        } else if (!email.contains("@")) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Email address must contain '@'.");
-            return;
-        }
+    private ServiceUser userService; // Assuming you have a ServiceUser class for user operations
 
-        user.setEmail(email);
-
-        if (password.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Please enter your password.");
-            return;
-        }
-
-        user.setPassword(password);
-
-        // Set isVerified based on CheckBox state
-        boolean isVerified = isVerifiedId.isSelected(); // Changed from isverifiedId
-        user.setIs_verified(isVerified);
-
-        String selectedRole = roleId.getValue();
-        if (selectedRole == null || selectedRole.trim().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Please select a role.");
-            return; // Stop processing if role is not selected
-        }
-
-        // Correspondance des rôles sélectionnés avec les valeurs attendues
-        String roleValue;
-        switch (selectedRole) {
-            case "Administrateur":
-                roleValue = "[\"ROLE_ADMIN\"]";
-                break;
-            case "Recruteur":
-                roleValue = "[\"ROLE_RECRUTEUR\"]";
-                break;
-            case "Freelancer":
-                roleValue = "[\"ROLE_FREELANCER\"]" ;
-                break;
-            default:
-                showAlert(Alert.AlertType.ERROR, "Error", "Invalid role selected.");
-                return; // Stop processing if an invalid role is selected
-        }
-
-        user.setRoles(roleValue);
-
-        try {
-            serviceUser.add(user);
-            showAlert(Alert.AlertType.CONFIRMATION, "Success", "User added");
-        } catch (SQLException e) {
-            showAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
-        }
-    }
-
-    /*
     @FXML
     public void initialize() {
-        initializeRoleComboBox();
+        userService = new ServiceUser(); // Initialize the ServiceUser instance
     }
 
-    private void initializeRoleComboBox() {
-        List<String> rolesList = Arrays.asList("Administrateur", "Recruteur", "Freelancer");
-        roleId.setItems(FXCollections.observableArrayList(rolesList));
+    @FXML
+    public void addUser() {
+        String username = usernameId.getText().trim();
+        String email = emailId.getText().trim();
+        String selectedRole = roleId.getValue();
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+
+        if (username.isEmpty()) {
+            alert.setContentText("Please enter a username.");
+            alert.showAndWait();
+        }
+
+        if (email.isEmpty()) {
+            alert.setContentText("Please enter an email address.");
+            alert.showAndWait();
+
+        } else if (!email.contains("@")) {
+            alert.setContentText("Email address must contain '@'.");
+            alert.showAndWait();
+
+        }
+
+        if (selectedRole == null || selectedRole.trim().isEmpty()) {
+            alert.setContentText("Please select a role.");
+            alert.showAndWait();
+
+        }
+
+        try {
+            // Check if user with the provided email already exists
+            if (userService.userExists(email)) {
+                alert.setContentText("User with email " + email + " already exists.");
+                alert.showAndWait();
+
+            }
+
+            // Create a new User object and set its properties
+            User user = new User();
+            user.setUsername(username);
+            user.setEmail(email);
+            user.setRoles(getRoleValue(selectedRole)); // Get the role value based on the selected role
+
+            userService.signup(user); // Add the user using the ServiceUser instance
+
+            // Call the sendEmailVerification method from EmailAPI to send the verification email
+            EmailAPI.sendEmailVerification(email);
+
+            alert.setAlertType(Alert.AlertType.INFORMATION);
+            alert.setContentText("User registered successfully.");
+            alert.showAndWait();
+
+            Stage stage = (Stage) addUserButton.getScene().getWindow();
+            stage.close();
+        } catch (Exception e) {
+            alert.setContentText("Failed to register user: " + e.getMessage());
+            alert.showAndWait();
+        }
     }
-     */
+
+    private String getRoleValue(String selectedRole) {
+        switch (selectedRole) {
+            case "Administrateur":
+                return "[\"ROLE_ADMIN\"]";
+            case "Recruteur":
+                return "[\"ROLE_RECRUTEUR\"]";
+            case "Freelancer":
+                return "[\"ROLE_FREELANCER\"]";
+            default:
+                return ""; // Handle other cases accordingly
+        }
+    }
 }

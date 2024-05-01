@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class Back {
@@ -16,11 +15,8 @@ public class Back {
 
     @FXML
     private HBox logout;
-    @FXML
-    private void initialize() {
-        // Initialiser le gestionnaire d'événements pour l'élément HBox logout
-        logout.setOnMouseClicked(event -> handleLogout());
-    }
+
+
     @FXML
     private void handleUsersButtonClick() {
         try {
@@ -31,6 +27,7 @@ public class Back {
         }
     }
 
+
     @FXML
     private void handleLogout() {
         Stage stage = (Stage) logout.getScene().getWindow(); // Obtenir la fenêtre actuelle
@@ -40,17 +37,33 @@ public class Back {
             // Charger le fichier FXML login.fxml
             Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
             Scene scene = new Scene(root);
-
-            // Créer une nouvelle fenêtre pour la scène de login
-            Stage loginStage = new Stage();
-            loginStage.setScene(scene);
-            loginStage.setTitle("Login");
-
-            // Afficher la fenêtre de login
-            loginStage.show();
+            Stage mainStage = new Stage();
+            mainStage.setScene(scene);
+            mainStage.setTitle("Login");
+            mainStage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            // Gérer l'exception si le chargement du fichier login.fxml échoue
         }
     }
+
+    @FXML
+    private void handleProfile() {
+        try {
+            // Charger le fichier FXML editProfile.fxml
+            Parent root = FXMLLoader.load(getClass().getResource("/editProfile.fxml"));
+            Scene scene = new Scene(root);
+
+            // Créer une nouvelle fenêtre pour la scène d'édition de profil
+            Stage editProfileStage = new Stage();
+            editProfileStage.setScene(scene);
+            editProfileStage.setTitle("Edit Profile");
+
+            // Afficher la fenêtre d'édition de profil
+            editProfileStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Gérer l'exception si le chargement du fichier editProfile.fxml échoue
+        }
+    }
+
 }

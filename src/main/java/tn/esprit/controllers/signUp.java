@@ -11,16 +11,16 @@ import tn.esprit.services.ServiceUser;
 public class signUp {
 
     @FXML
+    private PasswordField passwordField;
+
+    @FXML
     private PasswordField confirmPasswordField;
 
     @FXML
     private TextField emailField;
 
     @FXML
-    private PasswordField passwordField;
-
-    @FXML
-    private ComboBox<String> roleComboBox;
+    private ComboBox<String> roleId;
 
     @FXML
     private Button signupButton;
@@ -44,13 +44,9 @@ public class signUp {
         String email = emailField.getText().trim();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
-        String selectedRole = roleComboBox.getValue();
-/*
-        if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || selectedRole == null) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Please enter your username.");
-            return;
-        }
-*/
+        String selectedRole = roleId.getValue();
+
+
         if (username.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Error", "Please enter your username.");
             return;
@@ -70,15 +66,16 @@ public class signUp {
             return;
         }
 
-        if (password.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Please confirm your password.");
+        if (!confirmPassword.equals(password)) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Passwords do not match.");
             return;
         }
 
-        if (!termsCheckBox.isSelected()) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Please accept the terms and conditions.");
+        if (selectedRole == null || selectedRole.trim().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Please select a role.");
             return;
         }
+
 
         // Check if user with the provided email already exists
         try {
@@ -94,7 +91,8 @@ public class signUp {
             user.setPassword(password);
             user.setRoles(getRoleValue(selectedRole)); // Get the role value based on the selected role
 
-            userService.add(user); // Add the user using the ServiceUser instance
+
+            userService.signup(user); // Add the user using the ServiceUser instance
 
             // Call the sendEmailVerification method from EmailAPI to send the verification email
             EmailAPI.sendEmailVerification(email);

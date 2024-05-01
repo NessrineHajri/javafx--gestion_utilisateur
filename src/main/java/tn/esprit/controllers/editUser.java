@@ -15,8 +15,6 @@ public class editUser {
     @FXML
     private TextField emailId;
 
-    @FXML
-    private PasswordField passwordId;
 
     @FXML
     private ComboBox<String> roleId;
@@ -36,7 +34,7 @@ public class editUser {
         // Display user data in the form fields
         usernameId.setText(user.getUsername());
         emailId.setText(user.getEmail());
-        passwordId.setText(user.getPassword());
+
         // Set the role based on the value from the User object
         switch (user.getRoles()) {
             case "[\"ROLE_ADMIN\"]":
@@ -61,7 +59,7 @@ public class editUser {
             // Update user data with form values
             currentUser.setUsername(usernameId.getText());
             currentUser.setEmail(emailId.getText());
-            currentUser.setPassword(passwordId.getText());
+
             String selectedRole = roleId.getValue(); // Get the selected role from ComboBox
             String roleValue;
             switch (selectedRole) {
@@ -105,7 +103,7 @@ public class editUser {
         if (user != null) {
             usernameId.setText(user.getUsername());
             emailId.setText(user.getEmail());
-            passwordId.setText(user.getPassword()); // Assuming password is also needed
+
             roleId.setValue(user.getRoles());
             isVerifiedId.setSelected(user.getIs_verified()); // Assuming isVerified is a boolean in User class
         }

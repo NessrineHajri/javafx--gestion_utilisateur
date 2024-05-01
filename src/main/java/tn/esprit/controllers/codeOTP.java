@@ -87,7 +87,7 @@ public class codeOTP {
             // Affiche une alerte indiquant que le code saisi est invalide
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Code OTP invalide");
-            alert.setContentText("Le code OTP saisi est invalide. Veuillez saisir à nouveau votre code.");
+            alert.setContentText("The OTP code you entered is incorrect. Please verify your code.");
             alert.showAndWait();
         }
     }

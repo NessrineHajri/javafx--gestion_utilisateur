@@ -13,16 +13,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="530.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.editUser">
+<AnchorPane prefHeight="500.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.editUser">
 
     <children>
-        <Pane prefHeight="68.0" prefWidth="477.0" style="-fx-background-color: #6454FF;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-        <Label layoutX="203.0" layoutY="20.0" prefHeight="32.0" prefWidth="197.0" text="Edit User" textFill="WHITE">
-            <font>
-                <Font name="Arial" size="28.0" />
-            </font>
-        </Label>
-        <TextField fx:id="usernameId" layoutX="155.0" layoutY="97.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="47.0" prefWidth="239.0" promptText="Username" style="-fx-border-radius: 20; -fx-background-color: #E4E4E4; -fx-font-family: Serif; -fx-alignment: center; -fx-font-size: 18; -fx-prompt-text-fill: derive(-fx-control-inner-background, -30%); -fx-text-fill: #666666;">
+        <Pane prefHeight="68.0" prefWidth="477.0"  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+
+        <TextField fx:id="usernameId" layoutX="155.0" layoutY="97.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="47.0" prefWidth="239.0" promptText="Username" >
             <padding>
                 <Insets bottom="10.0" left="7.0" right="6.0" top="10.0" />
             </padding>
@@ -30,7 +26,7 @@
                 <Font size="14.0" />
             </font>
         </TextField>
-        <TextField fx:id="emailId" layoutX="154.0" layoutY="160.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="47.0" prefWidth="239.0" promptText="Email" style="-fx-border-radius: 20; -fx-background-color: #E4E4E4; -fx-font-family: Serif; -fx-alignment: center; -fx-font-size: 18; -fx-prompt-text-fill: derive(-fx-control-inner-background, -30%); -fx-text-fill: #666666;">
+        <TextField fx:id="emailId" layoutX="154.0" layoutY="160.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="47.0" prefWidth="239.0" promptText="Email" >
             <padding>
                 <Insets bottom="10.0" left="7.0" right="6.0" top="10.0" />
             </padding>
@@ -38,15 +34,8 @@
                 <Font size="13.0" />
             </font>
         </TextField>
-        <PasswordField fx:id="passwordId" layoutX="155.0" layoutY="358.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="47.0" prefWidth="239.0" promptText="Password" style="-fx-border-radius: 20; -fx-background-color: #E4E4E4; -fx-font-family: Serif; -fx-alignment: center; -fx-font-size: 18; -fx-prompt-text-fill: derive(-fx-control-inner-background, -30%); -fx-text-fill: #666666;">
-            <padding>
-                <Insets bottom="10.0" left="7.0" top="10.0" />
-            </padding>
-            <font>
-                <Font size="13.0" />
-            </font></PasswordField>
 
-        <ComboBox fx:id="roleId" layoutX="155.0" layoutY="227.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="55.0" prefWidth="239.0" promptText="Role" style="-fx-border-radius: 13; -fx-background-color: #E4E4E4; -fx-font-family: Serif; -fx-alignment: center; -fx-font-size: 18; -fx-prompt-text-fill: derive(-fx-control-inner-background, -30%); -fx-text-fill: #666666;">
+        <ComboBox fx:id="roleId" layoutX="155.0" layoutY="227.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="55.0" prefWidth="239.0" promptText="Role" >
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="Administrateur" />

@@ -9,4 +9,5 @@ public interface IServices<T> {
     void update(T t) throws SQLException;
     void delete(T t) throws SQLException;
     List<T> afficher() throws SQLException;
+    void signup(T t) throws SQLException;
 }
