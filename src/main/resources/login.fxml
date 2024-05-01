@@ -108,7 +108,7 @@
                            <Insets top="10.0" />
                         </VBox.margin>
                      </HBox>
-                     <Button fx:id="loginButton" mnemonicParsing="false" onMouseClicked="#loginButton2" prefHeight="43.0" prefWidth="391.0" style="-fx-border-radius: 20; -fx-background-color: #80B3FF; -fx-font-family: Serif; -fx-font-size: 20; -fx-text-fill: white;" text="Sign up">
+                     <Button fx:id="loginButton" mnemonicParsing="false" onMouseClicked="#loginButton2" prefHeight="43.0" prefWidth="391.0" style="-fx-border-radius: 20; -fx-background-color: #80B3FF; -fx-font-family: Serif; -fx-font-size: 20; -fx-text-fill: white;" text="Sign in">
                         <VBox.margin>
                            <Insets bottom="20.0" top="20.0" />
                         </VBox.margin>
