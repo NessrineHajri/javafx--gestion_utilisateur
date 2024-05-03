@@ -86,4 +86,15 @@
 }
  */
 
-
+/* edit profile */
+.hbox-nav {
+    -fx-padding: 5px 0; /* Ajustez le padding selon vos besoins */
+    -fx-padding: 5px 0; /* Ajustez le padding selon vos besoins */
+    -fx-border-width: 0 0 1 0; /* Bordure basse seulement */
+    -fx-border-color: rgba(10, 104, 246, 0.87); /* Couleur de la bordure */
+}
+.hbox-nav .button:armed,
+.hbox-nav .button:pressed {
+    -fx-background-color: white; /* Fond blanc au clic */
+    -fx-border-color: rgba(10, 104, 246, 0.87); /* Couleur de la bordure au clic */
+}

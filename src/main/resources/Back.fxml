@@ -2,10 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -35,7 +32,7 @@
                     </font>
                 </Text>
 
-                <HBox fx:id="profile" layoutX="1147.0" layoutY="31.0" spacing="10.0" onMouseClicked="#handleProfile">
+                <HBox fx:id="profile" layoutX="1147.0" layoutY="31.0" onMouseClicked="#handleProfile" spacing="10.0">
                     <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="0.0" layoutY="0.0" size="19" />
                     <Text fill="WHITE" layoutX="24.0" layoutY="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile">
                         <font>
@@ -162,12 +159,12 @@
                     </VBox.margin>
                 </HBox>
 
-                <HBox fx:id="logout" spacing="10.0" >
+                <HBox fx:id="logout" spacing="10.0">
                     <FontAwesomeIconView fill="#172bc270" glyphName="SIGN_OUT" size="19" wrappingWidth="13.980731010437012">
                         <HBox.margin>
                             <Insets left="41.0" top="13.0" />
                         </HBox.margin></FontAwesomeIconView>
-                    <JFXButton  onMouseClicked="#handleLogout" prefHeight="43.0" prefWidth="99.0" ripplerFill="#ffffff" text="Log out">
+                    <JFXButton onMouseClicked="#handleLogout" prefHeight="43.0" prefWidth="99.0" ripplerFill="#ffffff" text="Log out">
                         <font>
                             <Font size="20.0" />
                         </font>
@@ -179,7 +176,7 @@
                         </HBox.margin>
                     </JFXButton>
                     <VBox.margin>
-                        <Insets top="26.0" />
+                        <Insets top="11.0" />
                     </VBox.margin>
                 </HBox>
 

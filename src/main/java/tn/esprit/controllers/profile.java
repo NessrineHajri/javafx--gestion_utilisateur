@@ -1,10 +1,12 @@
 package tn.esprit.controllers;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import tn.esprit.entities.User;
 import tn.esprit.services.IServices;
 import tn.esprit.services.ServiceUser;
@@ -40,11 +42,15 @@ public class profile {
 
     @FXML
     void initialize() {
+
         User x = SessionManager.getCurrentUser();
+       /*
         if (x != null) {
             Username.setText("Connected as: " + x.getUsername());}
 
+         */
         displayUserData();
+
     }
 
 
@@ -58,18 +64,5 @@ public class profile {
         }
     }
 
-    @FXML
-    private void handleModify() {
-        // Logique pour la modification des informations utilisateur
-    }
 
-    @FXML
-    private void deleteAccount() {
-        // Logique pour la suppression du compte utilisateur
-    }
-
-    @FXML
-    private void changeProfilePicture() {
-        // Logique pour changer la photo de profil
-    }
 }
