@@ -9,15 +9,19 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import tn.esprit.entities.User;
 import tn.esprit.services.ServiceUser;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.prefs.Preferences;
 import javafx.scene.control.CheckBox;
+
+
 public class login {
 
     @FXML
@@ -61,6 +65,7 @@ public class login {
 
 */
 
+
     @FXML
     public void loginButton2() {
         try {
@@ -96,6 +101,8 @@ public class login {
             boolean authenticated = userService.authenticateUser(email, password);
 
             if (authenticated) {
+                User Utilisateur =userService.getUserByEmail(email);
+                SessionManager.setCurrentUser(Utilisateur);
                 redirectToBackInterface();
             } else {
                 // Vérifie si l'email est correct mais le mot de passe est incorrect
@@ -183,5 +190,7 @@ public class login {
             // Handle the exception appropriately (e.g., show an error dialog)
         }
     }
+
+
 
 }

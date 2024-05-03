@@ -1,11 +1,14 @@
 package tn.esprit.services;
 
 import org.mindrot.jbcrypt.BCrypt;
+import tn.esprit.controllers.UserSession;
 import tn.esprit.entities.User;
 import tn.esprit.utils.MyDB;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class ServiceUser implements IServices<User> {
@@ -169,7 +172,11 @@ public void add(User user) throws SQLException {
         pre.setBoolean(4, user.getIs_verified());
         pre.setInt(5, user.getId());
         pre.executeUpdate();
+
+
     }
+
+
 
     @Override
     public void delete(User user) throws SQLException {
@@ -223,5 +230,26 @@ public void add(User user) throws SQLException {
         }
     }
 
+    public User getUserByEmail(String email) throws SQLException {
+        String query = "SELECT * FROM user WHERE email=?";
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String roles = resultSet.getString("roles");
+                String password = resultSet.getString("password");
+                String username = resultSet.getString("username");
+                String Role = resultSet.getString("roles");
+                boolean is_verified = resultSet.getBoolean("is_verified");
+                return new User(id, email, roles, password, username,Role, is_verified);
+            }
+            return null; // No user found with the provided email
+        } catch (SQLException e) {
+            // Log the exception for debugging purposes
+            System.err.println("Error getting user by email: " + e.getMessage());
+            throw e; // Re-throw the exception to be handled in the controller
+        }
+    }
 
 }

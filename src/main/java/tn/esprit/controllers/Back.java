@@ -56,7 +56,7 @@ public class Back {
             // Créer une nouvelle fenêtre pour la scène d'édition de profil
             Stage editProfileStage = new Stage();
             editProfileStage.setScene(scene);
-            editProfileStage.setTitle("Edit Profile");
+            editProfileStage.setTitle("Profile");
 
             // Afficher la fenêtre d'édition de profil
             editProfileStage.show();

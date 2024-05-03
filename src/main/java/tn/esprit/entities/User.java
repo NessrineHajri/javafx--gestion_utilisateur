@@ -31,6 +31,15 @@ public class User {
         this.is_verified = is_verified;
     }
 
+    public User(int id, String email, String roles, String password, String username, String role, boolean isVerified) {
+        this.id = id;
+        this.email = email;
+        this.roles = role;
+        this.password = password;
+        this.username = username;
+    }
+
+
     public int getId() {
         return id;
     }
