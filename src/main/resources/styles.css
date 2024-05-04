@@ -87,15 +87,25 @@
  */
 
 /* edit profile */
+/* Style de la classe hbox-nav */
 .hbox-nav {
-    -fx-padding: 5px 0; /* Ajustez le padding selon vos besoins */
     -fx-padding: 5px 0; /* Ajustez le padding selon vos besoins */
     -fx-border-width: 0 0 1 0; /* Bordure basse seulement */
     -fx-border-color: rgba(10, 104, 246, 0.87); /* Couleur de la bordure */
 }
 
+
+/* Style des boutons dans la classe hbox-nav lorsqu'ils sont en état 'armed' ou 'pressed' */
+
 .hbox-nav .button:armed,
 .hbox-nav .button:pressed {
-    -fx-background-color: white !important; /* Fond blanc au clic */
+    -fx-background-color: #FFFFFF !important; /* Fond blanc au clic */
+}
+
+
+/* styles.css */
+.header-label {
+    -fx-text-fill: blue;
+    -fx-font-size: 24px; /* Optionnel : ajustez la taille de la police si nécessaire */
 }
 

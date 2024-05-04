@@ -1,17 +1,25 @@
 package tn.esprit.controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import tn.esprit.entities.User;
 import tn.esprit.services.IServices;
 import tn.esprit.services.ServiceUser;
 
+import java.io.IOException;
 import java.sql.SQLException;
+
+import tn.esprit.controllers.resetPassword;
 
 
 
@@ -28,6 +36,9 @@ public class profile {
 
     @FXML
     private TextField Role_field;
+
+    @FXML
+    private AnchorPane profilePane;
 
 
     @FXML
@@ -63,6 +74,7 @@ public class profile {
             Role_field.setText(x.getRoles());
         }
     }
+
 
 
 }

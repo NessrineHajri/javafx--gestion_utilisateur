@@ -45,7 +45,7 @@ public class addUser {
             alert.showAndWait();
         }
 
-        if (email.isEmpty()) {
+        else if (email.isEmpty()) {
             alert.setContentText("Please enter an email address.");
             alert.showAndWait();
 
@@ -55,7 +55,7 @@ public class addUser {
 
         }
 
-        if (selectedRole == null || selectedRole.trim().isEmpty()) {
+        else if (selectedRole == null || selectedRole.trim().isEmpty()) {
             alert.setContentText("Please select a role.");
             alert.showAndWait();
 

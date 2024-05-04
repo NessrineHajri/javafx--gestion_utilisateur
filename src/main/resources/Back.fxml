@@ -67,7 +67,7 @@
                             <Insets left="10.0" />
                         </padding>
                         <HBox.margin>
-                            <Insets left="-1.0" />
+                            <Insets left="4.0" />
                         </HBox.margin>
                     </JFXButton>
                     <VBox.margin>
@@ -88,7 +88,7 @@
                             <Insets left="10.0" />
                         </padding>
                         <HBox.margin>
-                            <Insets left="-1.0" />
+                            <Insets left="4.0" />
                         </HBox.margin>
                     </JFXButton>
                     <VBox.margin>
@@ -109,7 +109,7 @@
                             <Insets left="10.0" />
                         </padding>
                         <HBox.margin>
-                            <Insets left="8.0" />
+                            <Insets left="13.0" />
                         </HBox.margin>
                     </JFXButton>
                     <VBox.margin>
@@ -130,7 +130,7 @@
                             <Insets left="10.0" />
                         </padding>
                         <HBox.margin>
-                            <Insets left="8.0" />
+                            <Insets left="15.0" />
                         </HBox.margin>
                     </JFXButton>
                     <VBox.margin>
@@ -151,7 +151,7 @@
                             <Insets left="10.0" />
                         </padding>
                         <HBox.margin>
-                            <Insets left="7.0" />
+                            <Insets left="16.0" />
                         </HBox.margin>
                     </JFXButton>
                     <VBox.margin>
@@ -172,7 +172,7 @@
                             <Insets left="10.0" />
                         </padding>
                         <HBox.margin>
-                            <Insets left="-1.0" />
+                            <Insets left="11.0" />
                         </HBox.margin>
                     </JFXButton>
                     <VBox.margin>

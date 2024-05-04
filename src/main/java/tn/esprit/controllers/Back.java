@@ -46,6 +46,7 @@ public class Back {
         }
     }
 
+
     @FXML
     private void handleProfile() {
         try {
@@ -65,5 +66,7 @@ public class Back {
             // Gérer l'exception si le chargement du fichier editProfile.fxml échoue
         }
     }
+
+
 
 }

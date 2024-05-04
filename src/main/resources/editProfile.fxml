@@ -82,7 +82,7 @@
                             <Insets left="-6.0" right="20.0" top="2.0" />
                         </HBox.margin>
                     </Button>
-                    <Button fx:id="changePasswordBtn" prefHeight="22.0" prefWidth="149.0" style="-fx-background-color: transparent; -fx-text-fill: #007bff; -fx-font-size: 14px; -fx-padding: 0px 5px; -fx-border-radius: 0px; -fx-cursor: hand;" text="Delete Account">
+                    <Button fx:id="changePasswordBtn"  prefHeight="22.0" prefWidth="149.0" style="-fx-background-color: transparent; -fx-text-fill: #007bff; -fx-font-size: 14px; -fx-padding: 0px 5px; -fx-border-radius: 0px; -fx-cursor: hand;" text="Delete Account">
                         <HBox.margin>
                             <Insets left="-17.0" right="4.0" top="2.0" />
                         </HBox.margin>
